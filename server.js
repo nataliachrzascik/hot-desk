@@ -11,8 +11,9 @@ var corsOptions = {
   origin: "http://localhost:8080"
 }
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 //app.use(cors({credentials: true, origin: true}));
+app.use(cors());
 
 
 
