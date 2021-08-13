@@ -11,7 +11,7 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/api/auth/signup",
+    "http://localhost:8080/api/auth/signup",
     [
       verifySignUp.checkDuplicateUsernameOrEmail,
       verifySignUp.checkRolesExisted
