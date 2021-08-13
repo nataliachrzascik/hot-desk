@@ -7,9 +7,10 @@ var path = require('path');
 
 const app = express();
 
-var corsOptions = {
+/*var corsOptions = {
   origin: "http://localhost:8080"
 }
+*/
 
 //app.use(cors(corsOptions));
 //app.use(cors({credentials: true, origin: true}));
