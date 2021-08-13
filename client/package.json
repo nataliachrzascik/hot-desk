@@ -1,6 +1,7 @@
 {
   "name": "react-redux-jwt-auth",
   "version": "0.1.0",
+  "homepage":"https://hot-desk-ow.herokuapp.com/",
   "engines": {
     "node": "14.16.0"
   },
