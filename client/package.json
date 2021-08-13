@@ -31,7 +31,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "set PORT=8081 && react-scripts start",
+    "start": "set PORT=8080 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "heroku-postbuild": "cd client && npm install && npm run react-scripts build",
