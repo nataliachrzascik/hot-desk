@@ -19,9 +19,8 @@ function find (name, query, cb) {
 exports.getData = (req, res) => {
   console.log(req.url)
 
-  let first="http://localhost:8080"+req.url;
-  let team=first.substring(19);
-//let team=req.url.substring(19);
+  
+let team=req.url.substring(19);
 team=team.substring(0,team.indexOf("/"));
 
 let date=req.url.substring(19);
@@ -48,10 +47,9 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'off
 
   exports.makeReservation = (req, res) => {
 
-    let first="http://localhost:8080"+req.url;
-    let temp=first.substring(13,first.length);
+    
 
-    //let temp=req.url.substring(13,req.url.length);
+    let temp=req.url.substring(13,req.url.length);
     let numberPlace=temp.substring(0,temp.indexOf("/"));
     numberPlace=Number(numberPlace);
    temp=temp.substring(temp.indexOf("/")+1,temp.length);
@@ -164,12 +162,10 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
   }
 
   exports.getUserReservations = (req, res) => {
-      console.log(req.url);
 
-    let first="http://localhost:8080"+req.url;
 
-    let nick=first.substring(6,first.length)
-   //let nick=req.url.substring(6,req.url.length)
+    
+   let nick=req.url.substring(6,req.url.length)
     
    
     find('users', {'username': nick }, function (err, data) {
