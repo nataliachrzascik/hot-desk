@@ -19,5 +19,5 @@ module.exports = function(app) {
     controller.signup
   );
 
-  app.post("api/auth/signin", controller.signin);
+  app.post("https://hot-desk-ow.herokuapp.com/api/auth/signin", controller.signin);
 };
