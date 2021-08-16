@@ -1,4 +1,3 @@
-const config=require("../config/authConfig.js");
 const db=require("../models");
 const Reservations=db.reservations;
 const mongoose = require('mongoose');
