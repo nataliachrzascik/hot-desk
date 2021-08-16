@@ -164,6 +164,7 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
   }
 
   exports.getUserReservations = (req, res) => {
+      console.log(req.url);
 
     let first="http://localhost:8080"+req.url;
 
