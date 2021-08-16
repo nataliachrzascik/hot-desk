@@ -57,6 +57,12 @@ app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
 })
 
+
+app.get('/api/auth/signin', (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+
 /*
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname+ '/client/build/index.html'));
