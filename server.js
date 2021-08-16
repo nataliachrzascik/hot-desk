@@ -23,7 +23,7 @@ const db = require("./models");
 const Role = db.role;
 
 db.mongoose
-  .connect(dbConfig.KEY, {
+  .connect(process.env.LINK_DATABASE || dbConfig.KEY, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
