@@ -6,13 +6,6 @@ var path = require('path');
 
 const app = express();
 
-/*var corsOptions = {
-  origin: "http://localhost:8080"
-}
-*/
-
-//app.use(cors(corsOptions));
-//app.use(cors({credentials: true, origin: true}));
 app.use(cors());
 
 
@@ -45,10 +38,6 @@ db.mongoose
   app.use(bodyParser.json({limit: "50mb"}));
 
 
-// simple route
-/*app.get("/", (req, res) => {
-  res.json({ message: "Workk" });
-});*/
 
 const root = require('path').join(__dirname, 'client', 'build')
 app.use(express.static(root));
@@ -56,18 +45,7 @@ app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
 })
 
-/*
-app.get('/api/auth/signin', (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
-*/
 
-
-/*
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname+ '/client/build/index.html'));
-});
-*/
 
 require('./routes/authRoutes.js')(app);
 require('./routes/userRoutes.js')(app);
