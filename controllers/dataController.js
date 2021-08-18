@@ -105,7 +105,7 @@ db.mongoose.connection.db.collection('users').updateMany({}, {
 
 
 
-find('wroclaw2', {'reservations.date._i' : `${year}-${month}-${day}`, 'placeNumber': numberPlace }, function (err, data) {
+find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'placeNumber': numberPlace }, function (err, data) {
 
   if(err){
     console.log("err");
