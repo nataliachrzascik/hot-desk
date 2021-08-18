@@ -113,36 +113,62 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
     res.status(500).send("error in controlers");
     return;
   }
- 
+  console.log("data");
+  console.log(data);
 
   if(data!=true){
   //zabezpieczenie przed sytuacją, gdy dwóch użytkowników wczytało w tej samej chwili aplikację, i oboje chca zarezerwować ten sam pokój na ten sam dzień
      
-  db.mongoose.connection.db.collection('wroclaw2').findOneAndUpdate(
-    { 'placeNumber': numberPlace }, 
-    { $push: { reservations: {reservationID: mongoose.Types.ObjectId(),date: moment.utc(year+"-"+month+"-"+day),userID:id}  } },
-   function (error, success) {
-         if (error) {
-          console.log("error");
-             console.log(error);
-         } else {
-          db.mongoose.connection.db.collection('users').findOneAndUpdate(
-            { '_id': mongoose.Types.ObjectId(id) }, 
-            { $push: { reservations: {reservationID: mongoose.Types.ObjectId(),date:moment.utc(year+"-"+month+"-"+day),place:numberPlace}  } },
-           function (error, success) {
-                 if (error) {
-                  console.log("error");
-                     console.log(error);
-                 } else {
-                  console.log("success");
-                  res.send(success.value);
-                  return;
-        
-                 }
-             });
 
-         }
-     });
+
+  find('users', {'_id': mongoose.Types.ObjectId(id) }, function (err, userGet) {
+
+    if(err){
+      console.log("err");
+      console.log(err);
+      res.status(500).send("error in controlers");
+      return;
+    }
+
+    if(userGet){
+
+        //zabezpieczenie przed sytuacją, gdy użytkownik nie istnieje
+
+
+      db.mongoose.connection.db.collection('wroclaw2').findOneAndUpdate(
+        { 'placeNumber': numberPlace }, 
+        { $push: { reservations: {reservationID: mongoose.Types.ObjectId(),date: moment.utc(year+"-"+month+"-"+day),userID:id}  } },
+       function (error, success) {
+             if (error) {
+              console.log("error");
+                 console.log(error);
+             } else {
+              db.mongoose.connection.db.collection('users').findOneAndUpdate(
+                { '_id': mongoose.Types.ObjectId(id) }, 
+                { $push: { reservations: {reservationID: mongoose.Types.ObjectId(),date:moment.utc(year+"-"+month+"-"+day),place:numberPlace}  } },
+               function (error, success) {
+                     if (error) {
+                      console.log("error");
+                         console.log(error);
+                     } else {
+                      console.log("success");
+                      res.send(success.value);
+                      return;
+            
+                     }
+                 });
+    
+             }
+         });
+
+
+    }else{
+      res.send("Nice try panie testerze. Użytkownik nie istnieje!");
+      return;
+    }
+
+
+  });
 
     }
     else{
