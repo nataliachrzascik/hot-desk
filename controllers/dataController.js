@@ -174,6 +174,7 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
 
     }
     else{
+       console.log("To już było zajęte!")
       res.send("Ktoś prawdopodobnie ubiegł Cię w rezerwacji miejsca!");
       return;
     }
