@@ -116,7 +116,7 @@ find('wroclaw2', {'reservations.date._i' : `${year}-${month}-${day}`, 'placeNumb
   console.log("data");
   console.log(data);
 
-  if(data!=true){
+  if(data===[]){
   //zabezpieczenie przed sytuacją, gdy dwóch użytkowników wczytało w tej samej chwili aplikację, i oboje chca zarezerwować ten sam pokój na ten sam dzień
      
 
