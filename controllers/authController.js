@@ -44,7 +44,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "User was registered successfully2!" });
+            res.send({ message: "Użytkownik został zarejestrowany" });
           });
         }
       );
@@ -62,7 +62,7 @@ exports.signup = (req, res) => {
             return;
           }
 
-          res.send({ message: "User was registered successfully3!" });
+          res.send({ message: "Użytkownik został zarejestrowany!" });
         });
       });
     }
@@ -82,7 +82,7 @@ exports.signin = (req, res) => {
       }
 
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ message: "Użytkownik nie znaleziony." });
       }
 
       var passwordIsValid = bcrypt.compareSync(
