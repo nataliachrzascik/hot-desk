@@ -117,6 +117,9 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
   console.log(data);
   console.log(year+"-"+month+"-"+day);
   console.log(numberPlace);
+  
+   console.log("data.length");
+  console.log(data.length);
 
    if(data!=true){
   //zabezpieczenie przed sytuacją, gdy dwóch użytkowników wczytało w tej samej chwili aplikację, i oboje chca zarezerwować ten sam pokój na ten sam dzień
