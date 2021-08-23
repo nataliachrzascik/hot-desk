@@ -16,4 +16,6 @@ console.log("routerr")
 
   app.post("/user/*", controller.getUserReservations);
 
+  app.post("/decline/*", controller.declineReservations);
+
 };
