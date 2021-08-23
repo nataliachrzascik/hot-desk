@@ -113,13 +113,7 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
     res.status(500).send("error in controlers");
     return;
   }
-  console.log("data");
-  console.log(data);
-  console.log(year+"-"+month+"-"+day);
-  console.log(numberPlace);
-  
-   console.log("data.length");
-  console.log(data.length);
+ 
 
   if(data.length===0){
   //zabezpieczenie przed sytuacją, gdy dwóch użytkowników wczytało w tej samej chwili aplikację, i oboje chca zarezerwować ten sam pokój na ten sam dzień
@@ -138,7 +132,17 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
     if(userGet){
 
         //zabezpieczenie przed sytuacją, gdy użytkownik nie istnieje
+        find('users', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), '_id': mongoose.Types.ObjectId(id) }, function (err, first) {
 
+          if(err){
+            console.log("err");
+            console.log(err);
+            res.status(500).send("error in controlers");
+            return;
+          }
+       
+
+          if(first.length===0){
 
       db.mongoose.connection.db.collection('wroclaw2').findOneAndUpdate(
         { 'placeNumber': numberPlace }, 
@@ -166,6 +170,13 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
              }
          });
 
+        }else{
+          res.send("Użytkownik może mieć tylko 1 rezerwacje dziennie");
+          return;
+        }
+
+        
+        });
 
     }else{
       res.send("Nice try panie testerze. Użytkownik nie istnieje!");
@@ -213,3 +224,51 @@ find('wroclaw2', {'reservations.date' : moment.utc(year+"-"+month+"-"+day), 'pla
     });
     
       };
+
+      
+exports.declineReservations = (req, res) => {
+
+
+let temp=req.url.substring(9);
+let user=temp.substring(0,temp.indexOf("/"));
+
+
+let date=temp.substring(temp.indexOf("/")+1);
+date=date.substring(0,10);
+let temp1=temp.substring(temp.indexOf("/")+12);
+let place=temp1.substring(0,temp1.indexOf("/"));
+let idUser=temp1.substring(temp1.indexOf("/")+1,temp1.length)
+
+
+place=Number(place);
+
+
+
+
+db.mongoose.connection.db.collection('users').updateMany({'_id': mongoose.Types.ObjectId(idUser)}, {
+  $pull: {
+    reservations:{date:moment.utc(date)}
+  }
+}, {
+  multi: true
+});
+
+
+db.mongoose.connection.db.collection('wroclaw2').updateMany({'reservations.userID': idUser}, {
+  $pull: {
+    reservations:{date:moment.utc(date)}
+  }
+  }, {
+    multi: true
+  });
+
+  res.send("deleted")
+
+
+
+
+
+
+  };
+
+
